@@ -1,5 +1,9 @@
 # Flash cards js
 
+## Example
+
+[Learn japanese kana](https://nanvel.github.io/kanalearn/)
+
 ## Algorithm
 
 Don't ask the same question twice in a row.

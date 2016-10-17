@@ -243,7 +243,7 @@ export default class AskBot {
 
     for (const k in this.pool) {
       let v = this.pool[k]
-      if (v.qkey != this.previousQuestion) {
+      if (v.qkey != this.previousQkey) {
         if (v.progress < 100) {
           questionsLt100.push(v)
         } else {
