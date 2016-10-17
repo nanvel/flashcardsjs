@@ -1,0 +1,33 @@
+{
+  "name": "flashcardsjs",
+  "version": "0.0.1",
+  "description": "Flash cards js",
+  "main": "build/index.html",
+  "scripts": {
+    "test": "babel source/bot.js --out-file tests/bot.js --presets es2015,stage-0 && babel source/tests.js --out-file tests/tests.js --presets es2015,stage-0 && node tests/tests.js",
+    "server": "node server.js",
+    "compile": "webpack -p --progress"
+  },
+  "author": "Oleksandr Polieno",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nanvel/flashcardsjs.git"
+  },
+  "devDependencies": {
+    "assert": "^1.4.1",
+    "babel-core": "^6.17.0",
+    "babel-loader": "^6.2.5",
+    "babel-preset-es2015": "^6.16.0",
+    "babel-preset-react": "^6.16.0",
+    "babel-preset-stage-0": "^6.16.0",
+    "css-loader": "^0.25.0",
+    "express": "^4.14.0",
+    "style-loader": "^0.13.1",
+    "webpack": "^1.13.2"
+  },
+  "dependencies": {
+    "react": "^15.3.2",
+    "react-dom": "^15.3.2"
+  }
+}
