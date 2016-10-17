@@ -1,20 +1,14 @@
 # Flash cards js
 
-## Example
-
-[Learn japanese kana](https://nanvel.github.io/kanalearn/)
-
-## Algorithm
-
-Don't ask the same question twice in a row.
-
-Options must be selected from the same questions set.
-
-Repeat asking a small amount of questions until they will be learned (~10).
-
-Ask questions considered learned only if there were a few wrong answers before (to improve mood).
+An example: [Learn Japanese kana](https://nanvel.github.io/kanalearn/)
 
 ## Setup
+
+### Use the template
+
+There is a template available: [https://github.com/nanvel/flashcards](https://github.com/nanvel/flashcards), just clone and set a questions list.
+
+### Compile
 
 ```bash
 git clone https://github.com/nanvel/flashcardsjs.git
@@ -25,18 +19,16 @@ npm run-script server
 open http://localhost:8000
 ```
 
-## Publish on GitHub pages
-
+Optimize:
 ```bash
 webpack -p --progress
 ```
 
 Create a new repository.
 
-copy:
+Copy `build/app.bundle.js` -> new repository root.
 
-- `build/app.bundle.js` -> new repository root
-- `build/index.html` -> new repository root
+Copy `build/index.html` -> new repository root.
 
 Add questions csv to the `questions` div:
 ```html
@@ -45,7 +37,7 @@ question1,answer1[,set1]
 ...
 <div>
 ```
-or set a csv file url to `questions` div `data-url` attribute:
+or set a csv file url to the `questions` div `data-url` attribute:
 ```html
 <div id="questions" data-url="questions.csv"></div>
 ```
@@ -55,7 +47,7 @@ Customize `index.html`: title, favicon, ....
 Create a new branch `gh-pages`, push.
 
 ```bash
-open https://<name>.github.io/<repository_name>/
+open https://<username>.github.io/<repository_name>/
 ```
 
 ## Links
