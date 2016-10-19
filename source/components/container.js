@@ -13,7 +13,7 @@ export default class ContainerComponent extends React.Component {
 
   PAGE_QUESTION = 'question'
   PAGE_MENU = 'menu'
-  LOCAL_STORAGE_KEY = 'session'
+  LOCAL_STORAGE_KEY_PREFIX = 'session'
 
   constructor(props) {
     super(props)
@@ -28,6 +28,11 @@ export default class ContainerComponent extends React.Component {
       progress: this.bot.getProgress(),
       question: this.bot.getQuestion()
     }
+  }
+
+  getLocalStorageKey() {
+    let key = window.location.pathname.replace(/\//g, '') || 'index'
+    return `${this.LOCAL_STORAGE_KEY_PREFIX}-${key}`
   }
 
   parseCSV({csv, delimiter=','}){
@@ -95,7 +100,7 @@ export default class ContainerComponent extends React.Component {
   }
 
   loadSession() {
-    let rawData = localStorage.getItem(this.LOCAL_STORAGE_KEY)
+    let rawData = localStorage.getItem(this.getLocalStorageKey())
     if (rawData != undefined) {
       return JSON.parse(rawData)
     }
@@ -103,7 +108,7 @@ export default class ContainerComponent extends React.Component {
   }
 
   saveSession() {
-    localStorage.setItem(this.LOCAL_STORAGE_KEY, JSON.stringify({
+    localStorage.setItem(this.getLocalStorageKey(), JSON.stringify({
       session: this.bot.getSession(),
       sets: this.sets
     }))
