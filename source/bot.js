@@ -3,6 +3,7 @@ export default class AskBot {
   PROGRESS_POOL_SIZE = 10;
   OPTIONS_NUMBER = 4;
   PROGRESSION = [10, 15, 25, 50];
+  CHOICE_RANDOMLY_EACH_N_TIME = 4;
 
   constructor({questions, sets}) {
     /*
@@ -37,6 +38,7 @@ export default class AskBot {
     this.rightCount = 0
     this.wrongCount = 0
     this.previousQkey = ''
+    this.questionCounter = 0
   }
 
   randomChoose(choices) {
@@ -85,8 +87,8 @@ export default class AskBot {
   setSets(sets) {
     let availableSets = this.getAvailableSets()
     this.sets = sets.filter(i => availableSets.indexOf(i) != -1)
-    if (!this.sets) {
-      this.sets = this.availableSets
+    if (!this.sets.length) {
+      this.sets = this.getAvailableSets()
     }
     return this.sets
   }
@@ -218,10 +220,13 @@ export default class AskBot {
   }
 
   getQuestion() {
+    this.questionCounter += 1
+
     let less100 = 0
+
     for (const k in this.pool) {
       let v = this.pool[k]
-      if (v.progress < 100) {
+      if (this.sets.indexOf(v.s) != -1 && v.progress < 100) {
         less100 += 1
       }
     }
@@ -238,35 +243,51 @@ export default class AskBot {
       }
     }
 
-    let questionsEq100 = []
-    let questionsLt100 = []
-
-    for (const k in this.pool) {
-      let v = this.pool[k]
-      if (v.qkey != this.previousQkey) {
-        if (v.progress < 100) {
-          questionsLt100.push(v)
-        } else {
-          questionsEq100.push(v)
-        }
-      }
-    }
-
-    questionsLt100.sort((a, b) => (a.progress - b.progress))
-
     let question = undefined
 
-    if (this.mood > 50) {
-      if (questionsLt100.length) {
-        question = this.randomChoose(questionsLt100)
-      } else {
-        question = this.randomChoose(questionsEq100)
+    if (this.questionsCount % this.CHOICE_RANDOMLY_EACH_N_TIME == 0) {
+      /* just choice randomly */
+
+      let poolQuestions = []
+      for (const k in this.pool) {
+        let v = this.pool[k]
+        if (this.sets.indexOf(v.s) != -1 && v.qkey != this.previousQkey) {
+          poolQuestions.push(v)
+        }
       }
+
+      question = this.randomChoose(poolQuestions)
+
     } else {
-      if (questionsEq100.length) {
-        question = this.randomChoose(questionsEq100)
+
+      let questionsEq100 = []
+      let questionsLt100 = []
+
+      for (const k in this.pool) {
+        let v = this.pool[k]
+        if (this.sets.indexOf(v.s) != -1 && v.qkey != this.previousQkey) {
+          if (v.progress < 100) {
+            questionsLt100.push(v)
+          } else {
+            questionsEq100.push(v)
+          }
+        }
+      }
+
+      questionsLt100.sort((a, b) => (a.progress - b.progress))
+
+      if (this.mood > 50) {
+        if (questionsLt100.length) {
+          question = this.randomChoose(questionsLt100)
+        } else {
+          question = this.randomChoose(questionsEq100)
+        }
       } else {
-        question = questionsLt100[questionsLt100.length - 1]
+        if (questionsEq100.length) {
+          question = this.randomChoose(questionsEq100)
+        } else {
+          question = questionsLt100[questionsLt100.length - 1]
+        }
       }
     }
 

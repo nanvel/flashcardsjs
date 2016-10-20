@@ -7,7 +7,7 @@ let questions, bot, question
 
 /*
 test next question is not the previous one
-test availableSets, default set
+test availableSets, default set, set empty sets
 test progress
 */
 
@@ -25,6 +25,7 @@ assert(bot.getQuestion().q == 'q2')
 let availableSets = bot.getAvailableSets()
 assert(availableSets.length == 1)
 assert(availableSets[0] == 'default')
+assert(bot.setSets([]).length == 1)
 
 assert(bot.getProgress() == 0)
 question = bot.getQuestion()

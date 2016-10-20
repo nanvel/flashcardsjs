@@ -46,7 +46,7 @@ export default class MenuComponent extends React.Component {
             defaultChecked={true}
             onClick={this.disableSet.bind(this, v)}
           />
-        <label for={`set${i}`}> { v }</label>
+        <label htmlFor={`set${i}`}> { v }</label>
         </div>)
       } else {
         radios.push(<div key={i}>
@@ -58,7 +58,7 @@ export default class MenuComponent extends React.Component {
             value={v}
             onClick={this.enableSet.bind(this, v)}
           />
-        <label for={`set${i}`}> { v }</label>
+        <label htmlFor={`set${i}`}> { v }</label>
         </div>)
       }
     }
