@@ -28,7 +28,8 @@ export default class AnswersComponent extends React.Component {
 
   render() {
     let rowStyle = {
-      height: '60px'
+      height: '60px',
+      whiteSpace: 'nowrap'
     }
 
     let colStyle = {
