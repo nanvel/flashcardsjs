@@ -39,7 +39,8 @@ export default class AnswersComponent extends React.Component {
       textAlign: 'center',
       borderTop: '1px solid #eee',
       cursor: 'pointer',
-      fontSize: '24px'
+      // fontSize: '24px',
+      fontSize: '5vw'
     }
 
     let col1Style = Object.assign({}, colStyle)

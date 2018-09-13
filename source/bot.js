@@ -309,6 +309,10 @@ export default class AskBot {
       }
     }
 
+    while (options.length < 4) {
+      options.push({q: '-', a: '-', s: options[0].s})
+    }
+
     this.randomShuffle(options)
 
     let result = Object.assign({}, question)

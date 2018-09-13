@@ -9,7 +9,8 @@ export default class QuestionComponent extends React.Component {
       top: '50%',
       width: '100%',
       textAlign: 'center',
-      fontSize: '92px',
+      // fontSize: '92px',
+      fontSize: '8vw',
       lineHeight: '60px',
       marginTop: '-90px'
     }
